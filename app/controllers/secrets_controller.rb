@@ -1,5 +1,5 @@
 class SecretsController < ApplicationController
-  before_action :set_secret, only: [:show, :edit, :update, :destroy]
+  before_action :set_secret, only: [:show, :edit, :update, :destroy, :preview]
 
   # GET /secrets
   # GET /secrets.json
@@ -10,6 +10,11 @@ class SecretsController < ApplicationController
   # GET /secrets/1
   # GET /secrets/1.json
   def show
+    # destroy the secret in the background
+    Thread.new { @secret.destroy }
+  end
+
+  def preview
   end
 
   # GET /secrets/new
@@ -28,8 +33,8 @@ class SecretsController < ApplicationController
 
     respond_to do |format|
       if @secret.save
-        format.html { redirect_to @secret, notice: 'Secret was successfully created.' }
-        format.json { render :show, status: :created, location: @secret }
+        format.html { render :preview, status: :ok, location: @secret, notice: 'Secret was successfully created.' }
+        format.json { render :preview, status: :ok, location: @secret }
       else
         format.html { render :new }
         format.json { render json: @secret.errors, status: :unprocessable_entity }
