@@ -13,9 +13,10 @@
 ActiveRecord::Schema.define(version: 2019_02_20_073346) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "secrets", force: :cascade do |t|
+  create_table "secrets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "encrypted_body"
     t.text "encrypted_body_iv"
