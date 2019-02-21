@@ -1,5 +1,6 @@
 class SecretsController < ApplicationController
-  before_action :set_secret, only: [:show, :edit, :update, :destroy, :preview]
+  before_action :set_secret, only: [:show, :edit, :update, :destroy]
+  before_action :set_expiration, only: [:create, :update]
 
   # GET /secrets
   # GET /secrets.json
@@ -12,9 +13,6 @@ class SecretsController < ApplicationController
   def show
     # destroy the secret in the background
     Thread.new { @secret.destroy }
-  end
-
-  def preview
   end
 
   # GET /secrets/new
@@ -76,4 +74,9 @@ class SecretsController < ApplicationController
     def secret_params
       params.require(:secret).permit(:title, :body, :password, :expiration)
     end
+
+    def set_expiration
+      params[:secret][:expiration] = Time.current + (params[:secret][:expiration].to_i * 60 * 60 )
+    end
+
 end

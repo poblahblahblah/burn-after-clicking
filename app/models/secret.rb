@@ -1,6 +1,10 @@
 require 'bcrypt'
 
 class Secret < ApplicationRecord
+  validates :title, presence: true
+  validates :body, presence: true
+  validates :expiration, presence: true, numericality: true
+
   attr_encrypted :body,
     mode: :per_attribute_iv,
     key: Rails.application.credentials.secret_body_key.byteslice(0, 32),
