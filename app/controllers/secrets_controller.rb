@@ -12,7 +12,18 @@ class SecretsController < ApplicationController
 
   # GET /secrets/1
   # GET /secrets/1.json
+  # If there is no password set then show the secret.
+  # If there is a password set, then show the form to unlock.
   def show
+    if @secret.password.empty?
+      respond_to do |format|
+        format.html { render :preview, status: :ok, location: @secret, notice: 'Secret has been unlocked and destroyed' }
+        format.json { render :preview, status: :ok, location: @secret }
+
+        # Destroy after rendering
+        Thread.new { @secret.destroy }
+      end
+    end
   end
 
   # GET /secrets/new
@@ -20,12 +31,13 @@ class SecretsController < ApplicationController
     @secret = Secret.new
   end
 
+  # This is how we unlock the secret
   def update
     # if the password matches, render the preview and destroy the secret
     if BCrypt::Password.new(@secret[:password]) == params[:secret][:unlock_password]
       respond_to do |format|
         format.html { render :preview, status: :ok, location: @secret, notice: 'Secret has been unlocked and destroyed' }
-        format.html { render :preview, status: :ok, location: @secret }
+        format.json { render :preview, status: :ok, location: @secret }
 
         # Destroy after rendering
         Thread.new { @secret.destroy }
@@ -34,12 +46,6 @@ class SecretsController < ApplicationController
         format.json { render json: @secret.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  # GET /secrets/:d/unlocked
-  def unlocked
-    # destroy the secret in the background
-    #Thread.new { @secret.destroy }
   end
 
   # POST /secrets
