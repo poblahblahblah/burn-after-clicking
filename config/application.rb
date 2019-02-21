@@ -20,5 +20,11 @@ module BurnAfterClicking
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
+
+    # filter out the password and body from being logged
+    config.filter_parameters += [
+      :password,
+      :body
+    ]
   end
 end
