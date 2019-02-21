@@ -10,8 +10,13 @@ development:
   <<: *default
   database: burn_development
 
-
 test:
   <<: *default
   database: burn_test
 
+production:
+  <<: *default
+  host: <%= ENV['database_host'] %>
+  database: <%= ENV['database_db'] %>
+  username: <%= ENV['database_user'] %>
+  password: <%= ENV['database_pass'] %>
