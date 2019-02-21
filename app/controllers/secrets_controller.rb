@@ -2,7 +2,7 @@ require 'bcrypt'
 
 class SecretsController < ApplicationController
   before_action :set_secret, only: [:show, :update, :destroy]
-  before_action :set_expiration, only: [:create, :update]
+  before_action :set_expiration, only: [:create]
 
   # GET /secrets
   # GET /secrets.json
@@ -12,18 +12,7 @@ class SecretsController < ApplicationController
 
   # GET /secrets/1
   # GET /secrets/1.json
-  # If there is no password set then show the secret.
-  # If there is a password set, then show the form to unlock.
   def show
-    if @secret.password.empty?
-      respond_to do |format|
-        format.html { render :unlocked, status: :ok, location: @secret, notice: 'Secret has been unlocked and destroyed' }
-        format.json { render :unlocked, status: :ok, location: @secret }
-
-        # Destroy after rendering
-        Thread.new { @secret.destroy }
-      end
-    end
   end
 
   # GET /secrets/new
@@ -33,8 +22,15 @@ class SecretsController < ApplicationController
 
   # This is how we unlock the secret
   def update
-    # if the password matches, render the preview and destroy the secret
-    if BCrypt::Password.new(@secret[:password]) == params[:secret][:unlock_password]
+    success = false
+
+    if @secret[:password].empty?
+      success = true
+    else
+      success = true if BCrypt::Password.new(@secret[:password]) == params[:secret][:unlock_password]
+    end
+
+    if success
       respond_to do |format|
         format.html { render :unlocked, status: :ok, location: @secret, notice: 'Secret has been unlocked and destroyed' }
         format.json { render :unlocked, status: :ok, location: @secret }
