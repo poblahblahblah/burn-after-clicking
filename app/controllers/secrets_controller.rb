@@ -17,8 +17,8 @@ class SecretsController < ApplicationController
   def show
     if @secret.password.empty?
       respond_to do |format|
-        format.html { render :preview, status: :ok, location: @secret, notice: 'Secret has been unlocked and destroyed' }
-        format.json { render :preview, status: :ok, location: @secret }
+        format.html { render :unlocked, status: :ok, location: @secret, notice: 'Secret has been unlocked and destroyed' }
+        format.json { render :unlocked, status: :ok, location: @secret }
 
         # Destroy after rendering
         Thread.new { @secret.destroy }
@@ -36,13 +36,16 @@ class SecretsController < ApplicationController
     # if the password matches, render the preview and destroy the secret
     if BCrypt::Password.new(@secret[:password]) == params[:secret][:unlock_password]
       respond_to do |format|
-        format.html { render :preview, status: :ok, location: @secret, notice: 'Secret has been unlocked and destroyed' }
-        format.json { render :preview, status: :ok, location: @secret }
+        format.html { render :unlocked, status: :ok, location: @secret, notice: 'Secret has been unlocked and destroyed' }
+        format.json { render :unlocked, status: :ok, location: @secret }
 
         # Destroy after rendering
         Thread.new { @secret.destroy }
-      else
-        format.html { redirect_to @secret, notice: 'Could not unlock the secret. Try another password.' }
+      end
+    else
+      @secret.errors.add(:incorrect_password, " - The password you entered was incorrect. Please try again.")
+      respond_to do |format|
+        format.html { render :show, status: 401 }
         format.json { render json: @secret.errors, status: :unprocessable_entity }
       end
     end
