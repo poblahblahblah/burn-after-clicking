@@ -28,6 +28,9 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# dotenv for dev and test
+gem 'dotenv-rails', groups: [:development, :test], require: 'dotenv/rails-now'
+
 # use attr_encrypted to save encrypted records
 gem 'attr_encrypted', '3.1.0'
 
