@@ -47,8 +47,6 @@ GEM
     archive-zip (0.11.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
-    attr_encrypted (3.1.0)
-      encryptor (~> 3.0.0)
     autoprefixer-rails (9.4.8)
       execjs
     bcrypt (3.1.12)
@@ -89,7 +87,6 @@ GEM
     dotenv-rails (2.6.0)
       dotenv (= 2.6.0)
       railties (>= 3.2, < 6.0)
-    encryptor (3.0.0)
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.9.25)
@@ -224,7 +221,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  attr_encrypted (= 3.1.0)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   bootstrap (= 4.3.1)
@@ -234,7 +230,6 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   dotenv-rails
-  encryptor
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
