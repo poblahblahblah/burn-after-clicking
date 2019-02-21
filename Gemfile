@@ -34,6 +34,10 @@ gem 'attr_encrypted', '3.1.0'
 # use encryptor to manage keys
 gem 'encryptor'
 
+# bootstrap is nice and easy
+gem 'bootstrap', '4.3.1'
+gem 'jquery-rails'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
