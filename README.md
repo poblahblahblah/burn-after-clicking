@@ -1,4 +1,14 @@
-# README
+# Burn After Clicking
+
+Step sending secrets through email.
+
+## What is this?
+
+A tool that you can use to more securely relay information to friends, family, partners, clients, coworkers, and strangers. All secrets are encrypted before being saved to the DB, and you can optionally set a password that must be used to unlock the secret. Once the link has been viewed it dissapears forever.
+
+[Check out the demo](https://burn-after-clicking.herokuapp.com/).
+
+If you are thinking about using this, please deploy it yourself so you can be more in control.
 
 ## Running Locally
 
@@ -16,7 +26,7 @@ docker-compose up
 
 ### Creating a Secret
 
-Browse to http://localhost:3000/secrets. There should be a button to Create a new Secret.
+Browse to http://localhost:3000. There should be a button to Create a new Secret.
 
 ### Verifying the Secret is Encrypted in the DB
 
@@ -40,5 +50,6 @@ burn_development=# select * from secrets;
 ```
 
 ## TODO
-  * Background job to delete entries after the expiration has passed
-  * Make sure of the optional password
+  * K8s templates
+  * Background job to delete entries after the expiration has passed.
+  * Use the password to encrypt/decrypt the body.
