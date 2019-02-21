@@ -36,6 +36,7 @@ gem 'encryptor'
 
 # bootstrap is nice and easy
 gem 'bootstrap', '4.3.1'
+gem 'bootstrap_form', '>= 4.1.0'
 gem 'jquery-rails'
 
 # Use ActiveStorage variant

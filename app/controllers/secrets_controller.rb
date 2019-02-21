@@ -1,5 +1,5 @@
 class SecretsController < ApplicationController
-  before_action :set_secret, only: [:show, :edit, :update, :destroy]
+  before_action :set_secret, only: [:show, :update, :destroy]
   before_action :set_expiration, only: [:create, :update]
 
   # GET /secrets
@@ -20,10 +20,6 @@ class SecretsController < ApplicationController
     @secret = Secret.new
   end
 
-  # GET /secrets/1/edit
-  def edit
-  end
-
   # POST /secrets
   # POST /secrets.json
   def create
@@ -35,20 +31,6 @@ class SecretsController < ApplicationController
         format.json { render :preview, status: :ok, location: @secret }
       else
         format.html { render :new }
-        format.json { render json: @secret.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /secrets/1
-  # PATCH/PUT /secrets/1.json
-  def update
-    respond_to do |format|
-      if @secret.update(secret_params)
-        format.html { redirect_to @secret, notice: 'Secret was successfully updated.' }
-        format.json { render :show, status: :ok, location: @secret }
-      else
-        format.html { render :edit }
         format.json { render json: @secret.errors, status: :unprocessable_entity }
       end
     end
