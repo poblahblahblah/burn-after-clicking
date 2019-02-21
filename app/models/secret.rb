@@ -12,6 +12,6 @@ class Secret < ApplicationRecord
 
   # hash the password before we save it. we will later compare the hashes to
   # make sure the passwords match.
-  before_save { |secret| secret.password = BCrypt::Password.create(self.password) }
+  before_save { |secret| secret.password = BCrypt::Password.create(secret.password) }
 
 end
