@@ -22,15 +22,8 @@ class SecretsController < ApplicationController
 
   # This is how we unlock the secret
   def update
-    success = false
-
-    if @secret[:password].empty?
-      success = true
-    else
-      success = true if BCrypt::Password.new(@secret[:password]) == params[:secret][:unlock_password]
-    end
-
-    if success
+    if verify_password
+      @body = decrypt_body
       respond_to do |format|
         format.html { render :unlocked, status: :ok, location: @secret, notice: 'Secret has been unlocked and destroyed' }
         format.json { render :unlocked, status: :ok, location: @secret }
@@ -86,6 +79,26 @@ class SecretsController < ApplicationController
 
     def set_expiration
       params[:secret][:expiration] = Time.current + (params[:secret][:expiration].to_i * 60 * 60 )
+    end
+
+    def verify_password
+      if @secret[:password].empty?
+        return true
+      else
+        if BCrypt::Password.new(@secret[:password]) == params[:secret][:unlock_password]
+          return true
+        else
+          return false
+        end
+      end
+    end
+
+    def decrypt_body
+      pass  = params[:secret][:unlock_password].empty? ? ENV['SECRET_BODY_CRYPT_KEY'] : params[:secret][:unlock_password]
+      key   = ActiveSupport::KeyGenerator.new(pass).generate_key(@secret.encrypted_body_salt, 32)
+      crypt = ActiveSupport::MessageEncryptor.new(key)
+
+      return crypt.decrypt_and_verify(@secret.encrypted_body)
     end
 
 end

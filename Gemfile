@@ -31,12 +31,6 @@ gem 'bcrypt', '~> 3.1.7'
 # dotenv for dev and test
 gem 'dotenv-rails', groups: [:development, :test], require: 'dotenv/rails-now'
 
-# use attr_encrypted to save encrypted records
-gem 'attr_encrypted', '3.1.0'
-
-# use encryptor to manage keys
-gem 'encryptor'
-
 # bootstrap is nice and easy
 gem 'bootstrap', '4.3.1'
 gem 'bootstrap_form', '>= 4.1.0'

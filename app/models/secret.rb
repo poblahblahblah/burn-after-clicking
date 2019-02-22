@@ -1,14 +1,13 @@
 require 'bcrypt'
 
 class Secret < ApplicationRecord
+  attr_accessor :body
+
   validates :title, presence: true
   validates :body, presence: true
   validates :expiration, presence: true, numericality: true
 
-  attr_encrypted :body,
-    mode: :per_attribute_iv,
-    key: ENV['SECRET_BODY_CRYPT_KEY'].byteslice(0, 32),
-    algorithm: 'aes-256-cbc'
+  before_save :encrypt_body
 
   # hash the password before we save it. we will later compare the hashes to
   # make sure the passwords match.
@@ -18,4 +17,16 @@ class Secret < ApplicationRecord
     end
   end
 
+  private
+
+  def encrypt_body
+    salt  = SecureRandom.hex(32)
+    pass  = self.password.empty? ? ENV['SECRET_BODY_CRYPT_KEY'] : self.password
+    key = ActiveSupport::KeyGenerator.new(pass).generate_key(salt, 32)
+    crypt = ActiveSupport::MessageEncryptor.new(key)
+    data = crypt.encrypt_and_sign(self.body)
+
+    self.encrypted_body_salt = salt
+    self.encrypted_body      = data
+  end
 end

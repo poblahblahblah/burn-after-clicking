@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 2019_02_20_073346) do
 
   create_table "secrets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
-    t.text "encrypted_body"
-    t.text "encrypted_body_iv"
     t.string "password"
+    t.text "encrypted_body"
+    t.text "encrypted_body_salt"
     t.datetime "expiration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
