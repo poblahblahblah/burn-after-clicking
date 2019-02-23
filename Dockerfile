@@ -11,6 +11,8 @@ COPY . /myapp
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
+RUN RAILS_GROUPS=assets bundle exec rake assets:precompile
+
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
