@@ -94,7 +94,7 @@ class SecretsController < ApplicationController
     end
 
     def decrypt_body
-      pass  = params[:secret][:unlock_password].empty? ? ENV['SECRET_BODY_CRYPT_KEY'] : params[:secret][:unlock_password]
+      pass  = params.key?(:no_password) ? ENV['SECRET_BODY_CRYPT_KEY'] : params[:secret][:unlock_password]
       key   = ActiveSupport::KeyGenerator.new(pass).generate_key(@secret.encrypted_body_salt, 32)
       crypt = ActiveSupport::MessageEncryptor.new(key)
 
