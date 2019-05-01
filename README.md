@@ -44,11 +44,26 @@ You should get something similar returned:
 
 ```
 burn_development=# select * from secrets;
-                  id                  | title |      encrypted_body      |    encrypted_body_iv     |                           password                           |     expiration      |         created_at         |         updated_at
---------------------------------------+-------+--------------------------+--------------------------+--------------------------------------------------------------+---------------------+----------------------------+----------------------------
- 5e0c3ea6-2fff-48fb-90a0-b933fd7d3b65 | test  | 7P+6MI3EBkhNcjW7TRtwFQ==+| Ryd8Qfeo4qi+N8icJjCUug==+| $2a$10$PBLGdy4D7ubQSw29cdWwQ.8nnrWcBG5JPD12XxCHHS7cIjRclLEYG | 2019-02-20 15:47:00 | 2019-02-20 15:47:07.369064 | 2019-02-20 15:47:07.369064
+                  id                  | title |                           password                           |                            encrypted_body                            |                       encrypted_body_salt                        |         expiration         |         created_at         |         updated_at
+--------------------------------------+-------+--------------------------------------------------------------+----------------------------------------------------------------------+------------------------------------------------------------------+----------------------------+----------------------------+----------------------------
+ 6da6c231-d3cf-4387-a3e0-b2c2b3615e73 | test  | $2a$10$9C.qLdU6nR2YyUFj9WUetO3wEj35WhNxLpXTJIVqdfgr/rNfBY5H2 | jziUARrV9B6c0rui71zjrvZr--g90F8A+BmkFVeLQD--sPNUpTDSm0hy9BM5ThXhJQ== | 83a72aeed9ad6ee66b895ea30fc3a557838bd580374f8c3508e95c9aec47ac32 | 2019-05-02 08:25:16.631233 | 2019-05-01 20:25:16.767563 | 2019-05-01 20:25:16.767563
+ 27857ee7-d452-44cb-9cfc-fd69f3f701d1 | test  | $2a$10$qikVctiH0hUXYJgkV1sLVe1pLFGlNO6W0t.uDMFCyiMiM5vDSQ6aG | drxa3uICqoZu2dh/X48=--0NllsY+BzZJ7MwZs--ayJF7KPD9w6w0xLSBIjaLQ==     | f0c644c568353cddd0a1c04d3baa3e236ad0a4d43ddbc65a544b5388a379ef81 | 2019-05-01 21:52:04.1354   | 2019-05-01 20:52:04.269374 | 2019-05-01 20:52:04.269374
+```
+
+## Healthcheck and Metrics endpoints
+
+Define your healthcheck and metric endpoint passwords as environment variables. Generate the basic auth headers:
+
+```
+# password is foobar, but the colon is required since we don't have a username.
+Base64.strict_encode64(":foobar")
+```
+
+Test with curl:
+
+```
+curl -D - -H 'Authorization:Basic OmZvb2Jhcg==' localhost:3000/metrics
 ```
 
 ## TODO
   * K8s templates
-  * Background job to delete entries after the expiration has passed.
