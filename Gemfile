@@ -36,6 +36,9 @@ gem 'bootstrap', '4.3.1'
 gem 'bootstrap_form', '>= 4.1.0'
 gem 'jquery-rails'
 
+# I'm taking the easy way out
+gem 'rufus-scheduler', '3.5.2'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
