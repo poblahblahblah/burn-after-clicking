@@ -16,9 +16,10 @@ health_and_metrics = Rack::Builder.app do
 
   map '/metrics' do
 
-    use Rack::Auth::Basic, 'Prometheus Metrics' do |username, password|
-      Rack::Utils.secure_compare(ENV['METRICS_PASS'], "#{username}:#{password}")
-    end
+    # Commented out until I can work out K8s + Prometheus Basic auth
+    #use Rack::Auth::Basic, 'Prometheus Metrics' do |username, password|
+    #  Rack::Utils.secure_compare(ENV['METRICS_PASS'], "#{username}:#{password}")
+    #end
 
     use Rack::Deflater
     use Prometheus::Middleware::Exporter, path: ''

@@ -39,6 +39,9 @@ gem 'jquery-rails'
 # I'm taking the easy way out
 gem 'rufus-scheduler', '3.5.2'
 
+# sweet sweet prometheus
+gem 'prometheus-client', '~> 0.9.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
