@@ -31,5 +31,8 @@ module BurnAfterClicking
       :password,
       :body
     ]
+
+    # Rack attack to slow down clients
+    config.middleware.use Rack::Attack
   end
 end

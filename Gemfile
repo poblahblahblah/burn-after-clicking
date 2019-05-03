@@ -42,6 +42,9 @@ gem 'rufus-scheduler', '3.5.2'
 # sweet sweet prometheus
 gem 'prometheus-client', '~> 0.9.0'
 
+# rack-attack to throttle requests
+gem 'rack-attack', '~> 6.0.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
