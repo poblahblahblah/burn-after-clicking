@@ -18,7 +18,6 @@ class SecretsTest < ApplicationSystemTestCase
     fill_in "Encrypted body iv", with: @secret.encrypted_body_iv
     fill_in "Expiration", with: @secret.expiration
     fill_in "Password", with: @secret.password
-    fill_in "Title", with: @secret.title
     click_on "Create Secret"
 
     assert_text "Secret was successfully created"
@@ -33,7 +32,6 @@ class SecretsTest < ApplicationSystemTestCase
     fill_in "Encrypted body iv", with: @secret.encrypted_body_iv
     fill_in "Expiration", with: @secret.expiration
     fill_in "Password", with: @secret.password
-    fill_in "Title", with: @secret.title
     click_on "Update Secret"
 
     assert_text "Secret was successfully updated"
