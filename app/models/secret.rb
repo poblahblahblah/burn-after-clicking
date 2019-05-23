@@ -3,7 +3,6 @@ require 'bcrypt'
 class Secret < ApplicationRecord
   attr_accessor :body
 
-  validates :title, presence: true, length: { maximum: 255, too_long: "%{count} characters is the maximum allowed" }
   validates :body, presence: true, length: { maximum: 5000, too_long: "%{count} characters is the maximum allowed" }
   validates :password, precense: false, length: { maximum: 255, too_long: "%{count} characters is the maximum allowed" }
   validates :expiration, presence: true, numericality: true
