@@ -240,7 +240,7 @@ DEPENDENCIES
   prometheus-client (~> 0.9.0)
   puma (~> 3.11)
   rack-attack (~> 6.0.0)
-  rails (~> 5.2.2)
+  rails (~> 5.2.3)
   rufus-scheduler (= 3.5.2)
   sassc-rails (~> 2.1.1)
   selenium-webdriver
@@ -252,7 +252,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.6.3p62
 
 BUNDLED WITH
-   1.16.1
+   1.17.2
