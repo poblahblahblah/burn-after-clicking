@@ -78,7 +78,8 @@ class SecretsController < ApplicationController
     end
 
     def set_expiration
-      params[:secret][:expiration] = Time.current + (params[:secret][:expiration].to_i * 60 * 60 )
+      expiry = params[:secret][:expiration].empty? ? 1 : params[:secret][:expiration].to_i
+      params[:secret][:expiration] = Time.current + (expiry * 60 * 60 )
     end
 
     def verify_password
