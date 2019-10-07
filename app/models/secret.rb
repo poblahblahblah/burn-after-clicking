@@ -5,7 +5,7 @@ class Secret < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 5000, too_long: "%{count} characters is the maximum allowed" }
   validates :password, precense: false, length: { maximum: 255, too_long: "%{count} characters is the maximum allowed" }
-  validates :expiration, presence: true, numericality: true
+  validates :expiration, presence: true
 
   before_save :encrypt_body
 
