@@ -48,6 +48,9 @@ gem 'rack-attack', '~> 6.0.0'
 # Nokogiri to at least 1.10.4 to address CVE-2019-5477
 gem 'nokogiri', '>= 1.10.4'
 
+# rubyzip to at least 1.3.0 to address
+gem 'rubyzip', '>= 1.3.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
