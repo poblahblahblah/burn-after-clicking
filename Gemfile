@@ -40,7 +40,7 @@ gem 'jquery-rails'
 gem 'rufus-scheduler', '3.5.2'
 
 # sweet sweet prometheus
-gem 'prometheus-client', '~> 0.9.0'
+gem 'prometheus_exporter', '0.4.16'
 
 # rack-attack to throttle requests
 gem 'rack-attack', '~> 6.0.0'
