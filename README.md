@@ -1,10 +1,10 @@
 # Burn After Clicking
 
-Step sending secrets through email.
+Stop sending secrets through email.
 
 ## What is this?
 
-A tool that you can use to more securely relay information to friends, family, partners, clients, coworkers, and strangers. All secrets are encrypted before being saved to the DB, and you can optionally set a password to use for encrypting that must also be used to unlock the secret. Once the link has been viewed it dissapears forever.
+A tool that you can use to more securely relay information to friends, family, partners, clients, coworkers, and strangers. All secrets are encrypted before being saved to the DB, and you can optionally set a password to use for encrypting that must also be used to unlock the secret. Once the link has been viewed it disappears forever.
 
 [Check out the demo](https://burn-after-clicking.herokuapp.com/).
 
