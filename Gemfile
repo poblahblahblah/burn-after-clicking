@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.4'
+gem 'rails', '~> 5.2.4.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -47,6 +47,12 @@ gem 'rack-attack', '~> 6.0.0'
 
 # Nokogiri to at least 1.10.4 to address CVE-2019-5477
 gem 'nokogiri', '>= 1.10.4'
+
+# bump rack per CVE-2020-8184
+gem 'rack', '>= 2.2.3'
+
+# bump websocket-extensions per CVE-2020-7663
+gem 'websocket-extensions', '>= 0.1.5'
 
 # rubyzip to at least 1.3.0 to address
 gem 'rubyzip', '>= 1.3.0'
