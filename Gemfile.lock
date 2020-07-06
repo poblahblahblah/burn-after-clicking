@@ -133,7 +133,7 @@ GEM
     popper_js (1.14.5)
     prometheus_exporter (0.4.16)
     public_suffix (3.0.3)
-    puma (3.12.4)
+    puma (3.12.6)
     raabro (1.1.6)
     rack (2.2.3)
     rack-attack (6.0.0)
