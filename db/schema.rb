@@ -10,33 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_23_033055) do
-
+ActiveRecord::Schema[7.1].define(version: 2019_05_23_033055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
-
-  create_table "queue_classic_jobs", force: :cascade do |t|
-    t.text "q_name", null: false
-    t.text "method", null: false
-    t.jsonb "args", null: false
-    t.datetime "locked_at"
-    t.integer "locked_by"
-    t.datetime "created_at", default: -> { "now()" }
-    t.datetime "scheduled_at", default: -> { "now()" }
-    t.index ["q_name", "id"], name: "idx_qc_on_name_only_unlocked", where: "(locked_at IS NULL)"
-    t.index ["scheduled_at", "id"], name: "idx_qc_on_scheduled_at_only_unlocked", where: "(locked_at IS NULL)"
-    t.check_constraint "length(method) > 0", name: "queue_classic_jobs_method_check"
-    t.check_constraint "length(q_name) > 0", name: "queue_classic_jobs_q_name_check"
-  end
 
   create_table "secrets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "password"
     t.text "encrypted_body"
     t.text "encrypted_body_salt"
-    t.datetime "expiration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "expiration", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
 end
