@@ -1,6 +1,6 @@
-FROM ruby:2.7.3
+FROM ruby:3.3.0
 RUN apt-get update -qq && apt-get install -y postgresql-client
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_21.x | apt-get install -y nodejs
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
