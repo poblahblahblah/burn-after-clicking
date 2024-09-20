@@ -171,7 +171,7 @@ GEM
       timeout
     net-smtp (0.5.0)
       net-protocol
-    nio4r (2.7.0)
+    nio4r (2.7.3)
     nokogiri (1.16.0-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.16.0-arm-linux)
@@ -190,7 +190,7 @@ GEM
     psych (5.1.2)
       stringio
     public_suffix (5.0.4)
-    puma (4.3.12)
+    puma (5.6.9)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.7.3)
@@ -321,7 +321,7 @@ DEPENDENCIES
   nokogiri (>= 1.10.4)
   pg (>= 0.18, < 2.0)
   prometheus_exporter (= 0.4.16)
-  puma (~> 4.3.12)
+  puma (~> 5.6.9)
   rack (>= 2.2.3)
   rack-attack (~> 6.0.0)
   rails (~> 7.2)
