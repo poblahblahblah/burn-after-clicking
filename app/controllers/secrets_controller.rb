@@ -1,6 +1,7 @@
 require 'bcrypt'
 
 class SecretsController < ApplicationController
+  before_action :ensure_html_format
   before_action :set_secret, only: [:show, :update, :destroy]
   before_action :set_expiration, only: [:create]
 
@@ -100,6 +101,12 @@ class SecretsController < ApplicationController
       crypt = ActiveSupport::MessageEncryptor.new(key)
 
       return crypt.decrypt_and_verify(@secret.encrypted_body)
+    end
+
+    def ensure_html_format
+      unless request.format.html?
+        render plain: "Not Found", status: :not_found
+      end
     end
 
 end
