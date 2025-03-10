@@ -13,7 +13,7 @@ class Secret < ApplicationRecord
   # make sure the passwords match.
   before_save do |secret|
     unless self.password.empty?
-      secret.password = BCrypt::Password.create(self.password, cost: 31)
+      secret.password = BCrypt::Password.create(self.password, cost: 19)
     end
   end
 
