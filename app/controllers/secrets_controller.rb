@@ -8,7 +8,9 @@ class SecretsController < ApplicationController
   # GET /secrets
   # GET /secrets.json
   def index
-    @secrets = Secret.all
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /secrets/1
