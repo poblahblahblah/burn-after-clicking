@@ -3,8 +3,8 @@ require 'bcrypt'
 class Secret < ApplicationRecord
   attr_accessor :body
 
-  validates :body, presence: true, length: { maximum: 10000, too_long: "%{count} characters is the maximum allowed" }
-  validates :password, presence: false, length: { maximum: 255, too_long: "%{count} characters is the maximum allowed" }
+  validates :body, presence: true, length: { maximum: 20000, too_long: "%{count} characters is the maximum allowed" }
+  validates :password, presence: true, length: { maximum: 255, too_long: "%{count} characters is the maximum allowed" }
   validates :expiration, presence: true
 
   before_save :encrypt_body
@@ -21,7 +21,7 @@ class Secret < ApplicationRecord
 
   def encrypt_body
     salt  = SecureRandom.hex(32)
-    pass  = self.password.empty? ? ENV['SECRET_BODY_CRYPT_KEY'] : self.password
+    pass  = self.password
     key = ActiveSupport::KeyGenerator.new(pass).generate_key(salt, 32)
     crypt = ActiveSupport::MessageEncryptor.new(key)
     data = crypt.encrypt_and_sign(self.body)
